@@ -315,7 +315,7 @@ func (r *RpcRequest) sendTxToRelay() {
 	p := []string{
 		r.rawTxHex,
 	}
-	_, err = fbRpc.CallWithFlashbotsSignature("eth_sendPrivateTransaction", r.relaySigningKey, p)
+	_, err = fbRpc.CallWithFlashbotsSignature("eth_sendPrivateRawTransaction", r.relaySigningKey, p)
 	fmt.Println("----debug-----2---", err)
 	if err != nil {
 		if errors.Is(err, flashbotsrpc.ErrRelayErrorResponse) {
