@@ -312,10 +312,10 @@ func (r *RpcRequest) sendTxToRelay() {
 	r.logger.Info("[sendTxToRelay] sending transaction", "builders count", len(sendPrivateTxArgs.Preferences.Privacy.Builders), "is_fast", r.urlParams.fast)
 	fmt.Println("----debug-----1---")
 	//_, err = fbRpc.CallWithFlashbotsSignature("eth_sendPrivateTransaction", r.relaySigningKey, sendPrivateTxArgs)
-	p := []string{
-		r.rawTxHex,
-	}
-	_, err = fbRpc.CallWithFlashbotsSignature("eth_sendPrivateRawTransaction", r.relaySigningKey, p)
+	//p := []string{
+	//	r.rawTxHex,
+	//}
+	_, err = fbRpc.CallWithFlashbotsSignature("eth_sendPrivateRawTransaction", r.relaySigningKey, r.rawTxHex)
 	fmt.Println("----debug-----2---", err)
 	if err != nil {
 		if errors.Is(err, flashbotsrpc.ErrRelayErrorResponse) {
