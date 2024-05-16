@@ -10,7 +10,7 @@ services:
     container_name:
       pg-rpc-endpoint
     environment:
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=dasfdsafsadfsdfs
       - POSTGRES_USER=postgres
       - POSTGRES_DB=test
     healthcheck:
@@ -21,7 +21,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
   migrate:
     image: migrate/migrate
     volumes:
@@ -32,5 +32,29 @@ services:
     depends_on:
       database:
         condition: service_healthy
-volumes:
-  db-data:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-app
+    environment:
+      LISTEN_ADDR: ":9000"
+      REDIS_ADDR: "redis:6379"
+      SIGNING_KEY: "0x607a11b45a7219cc61a3d9c5fd08c7eebd602a6a19a977f8d3771d5711a550f2"
+      PROXY_URL: "http://65.108.101.32:8545"
+      RELAY_URL: "http://65.108.101.32:8545"
+      PSQL_CONN: "postgres://postgres:dasfdsafsadfsdfs@database:5432/test?sslmode=disable"
+    ports:
+      - "9000:9000"
+    depends_on:
+      - redis
+      - postgres
+    command: >
+      /app/rpc-endpoint
+      -redis $(REDIS_ADDR)
+      -signingKey $(SIGNING_KEY)
+      -proxy $(PROXY_URL)
+      -listen $(LISTEN_ADDR)
+      -relayUrl $(RELAY_URL)
+      -psql $(PSQL_CONN)
