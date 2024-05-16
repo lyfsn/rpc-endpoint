@@ -37,7 +37,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: go-app
     environment:
       LISTEN_ADDR: ":9000"
       REDIS_ADDR: "redis:6379"
