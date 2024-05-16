@@ -26,7 +26,7 @@ services:
     image: migrate/migrate
     volumes:
       - ./sql/psql:/migrations
-    command: [ "-path", "/migrations", "-database",  "postgres://postgres:postgres@pg-rpc-endpoint:5432/test?sslmode=disable", "up" ]
+    command: [ "-path", "/migrations", "-database",  "postgres://postgres:dasfdsafsadfsdfs@pg-rpc-endpoint:5432/test?sslmode=disable", "up" ]
     links:
       - database
     depends_on:
@@ -44,7 +44,7 @@ services:
       SIGNING_KEY: "0x607a11b45a7219cc61a3d9c5fd08c7eebd602a6a19a977f8d3771d5711a550f2"
       PROXY_URL: "http://65.108.101.32:8545"
       RELAY_URL: "http://65.108.101.32:8545"
-      PSQL_CONN: "postgres://postgres:dasfdsafsadfsdfs@database:5432/test?sslmode=disable"
+      PSQL_CONN: "postgres://postgres:dasfdsafsadfsdfs@pg-rpc-endpoint:5432/test?sslmode=disable"
     ports:
       - "9545:9000"
     depends_on:
