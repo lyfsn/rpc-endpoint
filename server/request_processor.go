@@ -309,7 +309,7 @@ func (r *RpcRequest) sendTxToRelay() {
 		}
 	})
 	r.logger.Info("[sendTxToRelay] sending transaction", "builders count", len(sendPrivateTxArgs.Preferences.Privacy.Builders), "is_fast", r.urlParams.fast)
-	_, err = fbRpc.CallWithFlashbotsSignature("eth_sendPrivateTransaction", r.relaySigningKey, sendPrivateTxArgs)
+	_, err = fbRpc.CallWithFlashbotsSignature("eth_sendPrivateTransaction", r.relaySigningKey, r.rawTxHex)
 	if err != nil {
 		if errors.Is(err, flashbotsrpc.ErrRelayErrorResponse) {
 			r.logger.Info("[sendTxToRelay] Relay error response", "error", err, "rawTx", r.rawTxHex)
