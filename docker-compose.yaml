@@ -52,7 +52,7 @@ services:
     entrypoint: ["/app/rpc-endpoint"]
     command: >
       -redis ${REDIS_ADDR}
-      -signingKey ${SIGNING_KEY}
+      -signingKey "0x607a11b45a7219cc61a3d9c5fd08c7eebd602a6a19a977f8d3771d5711a550f2"
       -proxy ${PROXY_URL}
       -listen ${LISTEN_ADDR}
       -relayUrl ${RELAY_URL}
