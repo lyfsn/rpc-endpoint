@@ -50,11 +50,12 @@ services:
     depends_on:
       - redis
       - database
+    entrypoint: ["/app/rpc-endpoint"]
     command: >
-      /app/rpc-endpoint
-      -redis $(REDIS_ADDR)
-      -signingKey $(SIGNING_KEY)
-      -proxy $(PROXY_URL)
-      -listen $(LISTEN_ADDR)
-      -relayUrl $(RELAY_URL)
-      -psql $(PSQL_CONN)
+      -redis ${REDIS_ADDR}
+      -signingKey ${SIGNING_KEY}
+      -proxy ${PROXY_URL}
+      -listen ${LISTEN_ADDR}
+      -relayUrl ${RELAY_URL}
+      -psql ${PSQL_CONN}
+
