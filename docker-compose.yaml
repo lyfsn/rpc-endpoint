@@ -33,7 +33,7 @@ services:
       database:
         condition: service_healthy
 
-  app:
+  rpc:
     build:
       context: .
       dockerfile: Dockerfile
